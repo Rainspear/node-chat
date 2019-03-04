@@ -4,7 +4,7 @@ socket.on("connect", function()  {
 
     socket.emit("createMessenger", {
         from : "Nguyet@rain.com",
-        text : "Hello broadcast",
+        text : "Hello Khang admin",
         createAt : new Date().getMinutes()
     });
 });
@@ -14,6 +14,6 @@ socket.on("disconnect", function() {
 });
 
 socket.on("newMessenger", function(messenger) {
-    console.log("New messenger", messenger);
+    console.log(messenger);
 });
 

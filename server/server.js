@@ -15,18 +15,27 @@ app.use(express.static(publicPath));
 io.on("connection", (socket) => {
     console.log("New user connected");
 
+    socket.emit("newMessenger", {
+        from : "Khang@rain.com",
+        text : "Welcome everybody"
+    });
+
+    socket.broadcast.emit("newMessenger", {
+        from : "Khang@rain.com",
+        text : "A new user joined"
+    });
+
     socket.on("disconnect", () => {
         console.log("User was disconnected");
     });
 
     socket.on("createMessenger", (messenger) => {
         console.log("createMessenger", messenger);
-
-        io.emit("newMessenger", {
-            from: messenger.from,
-            text: messenger.text,
-            createAt: messenger.createAt
-        })
+        // io.emit("newMessenger", {
+        //     from: messenger.from,
+        //     text: messenger.text,
+        //     createAt: messenger.createAt
+        // });
     });
 })
 
