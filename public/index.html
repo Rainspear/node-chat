@@ -7,15 +7,6 @@
         <p> Welcome to node-chat app with socket.io</p>
 
         <script src="/socket.io/socket.io.js"></script>
-        <script>
-            var socket = io();
-            socket.on("connect", () => {
-                console.log("Client connected to server");
-            });
-
-            socket.on("disconnect", () => {
-                console.log("Disconnect from server");
-            })
-        </script>
+        <script src="js/index.js"></script>
     </body>
 </html>
