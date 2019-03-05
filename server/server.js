@@ -24,14 +24,13 @@ io.on("connection", (socket) => {
         console.log("User was disconnected");
     });
 
-    socket.on("createMessenger", (messenger) => {
+    socket.on("createMessenger", (messenger, callback) => {
+        // callback here mean the function from index.js
         console.log("createMessenger", messenger);
-        // io.emit("newMessenger", {
-        //     from: messenger.from,
-        //     text: messenger.text,
-        //     createAt: messenger.createAt
-        // });
+        io.emit("newMessenger", generateMessage(messenger.from, messenger.text));
+        callback("ack success");
     });
+
 })
 
 server.listen(port, () => {
