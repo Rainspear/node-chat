@@ -5,7 +5,7 @@ socket.on("connect", function()  {
     socket.emit("createMessenger", {
         from : "Nguyet@rain.com",
         text : "Hello Khang admin",
-        createAt : new Date().getMinutes()
+        createAt : new Date().getTime()
     });
 });
 

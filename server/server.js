@@ -7,6 +7,7 @@ const socketIO = require('socket.io');
 const http = require('http');
 const server = http.createServer(app);
 const io = socketIO(server);
+const {generateMessage} = require('./utils/message');
 
 console.log(publicPath);
 
@@ -15,15 +16,9 @@ app.use(express.static(publicPath));
 io.on("connection", (socket) => {
     console.log("New user connected");
 
-    socket.emit("newMessenger", {
-        from : "Khang@rain.com",
-        text : "Welcome everybody"
-    });
+    socket.emit("newMessenger", generateMessage("Khang@rain.com", "Welcome everybody"));
 
-    socket.broadcast.emit("newMessenger", {
-        from : "Khang@rain.com",
-        text : "A new user joined"
-    });
+    socket.broadcast.emit("newMessenger", generateMessage("Khang@rain.com", "New user joined"));
 
     socket.on("disconnect", () => {
         console.log("User was disconnected");
