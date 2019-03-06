@@ -33,3 +33,16 @@ jQuery('#message-form').on('submit', function(e){
 
     });
 });
+
+var locationBtn = jQuery('#send-location');
+locationBtn.on('click', function() {
+    if(!navigator.geolocation) {
+        return alert("Browser does not support geolocation");
+    }
+
+    navigator.geolocation.getCurrentPosition(function(position) {
+        console.log(position);
+    }, function() {
+        alert("unable to fetch location");
+    });
+});

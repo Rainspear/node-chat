@@ -6,11 +6,12 @@
     <body>
         <p> Welcome to node-chat app with socket.io</p>
         
+        <ol id="message"></ol>
         <form id="message-form">
             <input name="message" type="text" placeholder="Message here"/>
             <button>Send</button>
         </form>
-        <ol id="message"></ol>
+        <button id="send-locaction">Location submmit</button>
 
         <script src="/socket.io/socket.io.js"></script>
         <script src="js/libs/jquery-3.3.1.min.js"></script>
