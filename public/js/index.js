@@ -1,6 +1,10 @@
 var socket = io();
 socket.on("connect", function()  {
     console.log("Client connected to server");
+
+    socket.emit("takeId", {
+        id : socket.id
+    });
 });
 
 socket.on("disconnect", function() {
@@ -15,8 +19,18 @@ socket.on("newMessenger", function(messenger) {
     jQuery("#message").append(li);
 });
 
+socket.on("newLocation", function(location) {
+    var li = jQuery('<li></li>');
+    li.text(`${location.from}: `);
+    var a = jQuery('<a target="_blank">Current location</a>');
+    
+    a.attr('href', location.url);
+    li.append(a);
+    jQuery("#message").append(li);
+});
+
 socket.emit("createMessenger", {
-    from : "Nguyet@rain.com",
+    from : "ClientTest@rain.com",
     text : "Hello Khang admin",
     createAt : new Date().getTime()
 }, function (data) {
@@ -27,7 +41,7 @@ jQuery('#message-form').on('submit', function(e){
     e.preventDefault();
 
     socket.emit('createMessenger', {
-        from : "User",
+        from : `User ${socket.id}`,
         text : jQuery('[name=message]').val()
     }, function() {
 
@@ -42,6 +56,10 @@ locationBtn.on('click', function() {
 
     navigator.geolocation.getCurrentPosition(function(position) {
         console.log(position);
+        socket.emit("createLocation", {
+            latitude : position.coords.latitude,
+            longitude : position.coords.longitude
+        });
     }, function() {
         alert("unable to fetch location");
     });

@@ -7,7 +7,7 @@ const socketIO = require('socket.io');
 const http = require('http');
 const server = http.createServer(app);
 const io = socketIO(server);
-const {generateMessage} = require('./utils/message');
+const {generateMessage, generateLocationMessage} = require('./utils/message');
 
 console.log(publicPath);
 
@@ -18,7 +18,9 @@ io.on("connection", (socket) => {
 
     socket.emit("newMessenger", generateMessage("Khang@rain.com", "Welcome everybody"));
 
-    socket.broadcast.emit("newMessenger", generateMessage("Khang@rain.com", "New user joined"));
+    socket.on('takeId', function(info){
+        socket.broadcast.emit("newMessenger", generateMessage("Khang@rain.com", `New user joined : ${info.id}`));
+    });
 
     socket.on("disconnect", () => {
         console.log("User was disconnected");
@@ -29,6 +31,11 @@ io.on("connection", (socket) => {
         console.log("createMessenger", messenger);
         io.emit("newMessenger", generateMessage(messenger.from, messenger.text));
         callback("got it");
+    });
+
+    socket.on("createLocation", function(location){
+        //console.log(location);
+        io.emit("newLocation", generateLocationMessage(`User_${socket.id}`, location.latitude, location.longitude));
     });
 
 })
