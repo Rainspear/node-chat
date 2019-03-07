@@ -34,7 +34,7 @@ io.on("connection", (socket) => {
     });
 
     socket.on("createLocation", function(location){
-        //console.log(location);
+        console.log(location);
         io.emit("newLocation", generateLocationMessage(`User_${socket.id}`, location.latitude, location.longitude));
     });
 
