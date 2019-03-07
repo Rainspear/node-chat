@@ -11,7 +11,7 @@
         </div>
 
         <div class="chat__main">
-            <ol id="message" class="chat__messages"></ol>
+            <ol id="messages" class="chat__messages"></ol>
         
             <div class="chat__footer">
             <form id="message-form">
@@ -22,6 +22,35 @@
             <button id="send-location">Location submit</button>
             </div>
         </div>
+
+
+        <!-- template for rendering on <ol id="message"> -->
+        <script type="text/template" id="message-template">
+            <li class="message">
+                <div class="message__title">
+                    <h4>{{from}}</h4>
+                    <span>{{createAt}}</span>
+                </div>
+                <div class="message__body">
+                    <p>{{text}}</p>
+                </div>                
+            </li>
+        </script>
+        <script type="text/template" id="location-template">
+            <li class="message">
+                    <div class="message__title">
+                        <h4>{{from}}</h4>
+                        <span>{{createAt}}</span>
+                    </div>
+                    <div class="message__body">
+                        <p>
+                            <a href="{{url}}" target="_blank" style="text-decoration : none;">Current location</a>
+                        </p>
+                    </div>                    
+                </li>
+        </script>
+        <!-- Library -->
+        <script src="js/libs/mustache.js"></script>
         <script src="/socket.io/socket.io.js"></script>
         <script src="js/libs/jquery-3.3.1.min.js"></script>
         <script src="js/libs/moment.js"></script>
