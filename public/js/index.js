@@ -54,10 +54,10 @@ locationBtn.on('click', function() {
         return alert("Browser does not support geolocation");
     }
 
-    locationBtn.attr('disabled', 'disabled').text("sending ...");
+    locationBtn.attr('disabled', 'disabled').text("Sending ...");
 
     navigator.geolocation.getCurrentPosition(function(position) {
-        locationBtn.removeAttr('disabled');
+        locationBtn.removeAttr('disabled').text('Location Submit');
         console.log(position);
         socket.emit("createLocation", {
             latitude : position.coords.latitude,
