@@ -30,7 +30,7 @@ io.on("connection", (socket) => {
         // callback here mean the function from index.js
         console.log("createMessenger", messenger);
         io.emit("newMessenger", generateMessage(messenger.from, messenger.text));
-        callback("got it");
+        callback();
     });
 
     socket.on("createLocation", function(location){
