@@ -16,7 +16,7 @@ app.use(express.static(publicPath));
 io.on("connection", (socket) => {
     console.log("New user connected");
 
-    socket.emit("newMessenger", generateMessage("Khang@rain.com", "Welcome everybody"));
+    socket.emit("newMessenger", generateMessage("Khang@admin.com", "Welcome everybody"));
 
     socket.on('takeId', function(info){
         socket.broadcast.emit("newMessenger", generateMessage("Khang@rain.com", `New user joined : ${info.id}`));
